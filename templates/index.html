@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список покупок</title>
+</head>
+<body>
+    <h2>Список покупок ({{ user.username }})</h2>
+    <a href="{{ url_for('logout') }}">Выход</a>
+
+    <form method="POST">
+        <input type="text" name="item" placeholder="Новый продукт" required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <ul>
+        {% for item in items %}
+            <li>
+                <input type="checkbox" onchange="window.location.href='/?toggle={{ item[0] }}'" {% if item[2] %}checked{% endif %}>
+                {{ item[1] }}
+                <a href="?delete={{ item[0] }}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
